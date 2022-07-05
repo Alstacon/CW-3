@@ -6,25 +6,25 @@ class Funcs:
         self.path = path
 
     def load_data(self):
-        """loads data from json file"""
+        """Загружает данные из json файла"""
         with open(self.path, 'r', encoding='utf-8') as file:
             data = json.load(file)
         return data
 
     def get_all_data(self) -> list[dict]:
-        """returns all data"""
+        """Возвращает полный список постов"""
         feed = self.load_data()
         return feed
 
     def get_post_by_pk(self, pk) -> dict:
-        """returns the post by it's pk"""
+        """Возвращает пост по номеру"""
         feed = self.load_data()
         for n in feed:
             if n['pk'] == pk:
                 return n
 
     def search_for_post(self, query) -> list[dict]:
-        """returns the list of app bu the keyword"""
+        """Возвращает список постов по ключевому слову"""
         needed_posts = []
         feed = self.load_data()
         for n in feed:
@@ -33,7 +33,7 @@ class Funcs:
         return needed_posts
 
     def get_posts_by_user(self, user_name) -> list[dict] | str:
-        """returns app of a specific user"""
+        """Возвращает посты конкретного юзера"""
         feed = self.load_data()
         needed_posts = []
         for n in feed:
@@ -42,11 +42,11 @@ class Funcs:
         return needed_posts
 
     def get_comments_by_post_id(self, post_id) -> tuple:
-        """returns comment for certain post"""
+        """Возвращает комменты к выбранному посту"""
         needed_comments = []
         counter_comments = 'Комментариев'
-        feed = self.load_data()
-        for n in feed:
+        comments = self.load_data()
+        for n in comments:
             if post_id == n['post_id']:
                 needed_comments.append(n)
         number_of_comments = len(needed_comments)

@@ -23,14 +23,16 @@
       </a>
     </div>
   </header>
-  {% for post in posts %}
   <main class="container">
     <div class="search">
-      <form action="/" class="search__form">
-        <input type="search" class="search__input">
+      <form action="/search" class="search__form">
+        <input type="search" class="search__input" name="s">
       </form>
       <p class="search__results">Найдено постов: {{posts_count}}</p>
     </div>
+  </main>
+      {% for post in posts %}
+  <main class="container">
     <section class="items">
       <div class="items__item item">
         <div class="item__top">
@@ -44,7 +46,7 @@
         <a href="/posts/{{post.pk}}" class="item__post-link">
           <img src={{post.pic}} alt="" width="348" class="item__post-img">
         </a>
-        <p class="item__descr"><a href="/tag.html" class="item__tag">#food</a>{{post.content}}</p>
+        <p class="item__descr"><a href="/tag.html" class="item__tag">#food</a>{{post.content[:50]}}...</p>
         <div class="item__post-info">
           <div class="item__counter">
             <img src="../static/img/eye.png" alt="" class="item__counter-icon" width="26">
