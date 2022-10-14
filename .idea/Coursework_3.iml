@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.pytest_cache/v" />
       <excludeFolder url="file://$MODULE_DIR$/main/.pytest_cache/v" />
+      <excludeFolder url="file://$MODULE_DIR$/tests/.pytest_cache/v" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (venv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

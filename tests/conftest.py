@@ -1,16 +1,22 @@
 import pytest
-from utils import Funcs
+from utils import Funcs, get_tags
 
 
 @pytest.fixture()
 def posts_data():
-    data = Funcs('../main/data/data.json')
+    data = Funcs('./main/data/data.json')
     return data
 
 
 @pytest.fixture()
 def comments_data():
-    data = Funcs('../main/data/comments.json')
+    data = Funcs('./main/data/comments.json')
+    return data
+
+
+@pytest.fixture()
+def bookmarks_data():
+    data = Funcs('./main/data/data.json')
     return data
 
 

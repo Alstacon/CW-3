@@ -61,7 +61,7 @@ def users_page(username):
 @app_blueprint.route('/bookmarks/add/<int:post_id>')
 def bookmark_add_page(post_id):
     posts_data = Funcs('main/data/data.json')
-    bookmarks_data = Funcs('main/data/bookmarks.json')
+    bookmarks_data = Funcs('./main/data/bookmarks.json')
     bookmarks = bookmarks_data.load_data()
     posts_data.add_bookmark(post_id, bookmarks)
     return redirect("/", code=302)
@@ -70,7 +70,7 @@ def bookmark_add_page(post_id):
 @app_blueprint.route('/bookmarks/remove/<int:post_id>')
 def bookmark_del_page(post_id):
     posts_data = Funcs('main/data/data.json')
-    bookmarks_data = Funcs('main/data/bookmarks.json')
+    bookmarks_data = Funcs('./main/data/bookmarks.json')
     bookmarks = bookmarks_data.load_data()
     posts_data.delete_bookmark(post_id, bookmarks)
     return redirect("/bookmarks", code=302)
@@ -78,7 +78,7 @@ def bookmark_del_page(post_id):
 
 @app_blueprint.route('/bookmarks')
 def bookmarks_list_page():
-    bookmarks_data = Funcs('main/data/bookmarks.json')
+    bookmarks_data = Funcs('./main/data/bookmarks.json')
     bookmarks = bookmarks_data.load_data()
     if len(bookmarks) == 0:
         return render_template('zero_bookmarks.html')

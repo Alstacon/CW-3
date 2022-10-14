@@ -3,12 +3,17 @@ from main.views import app_blueprint
 from logger import logger
 from utils import Funcs
 
-app = Flask(__name__)
 
-app.config['JSON_AS_ASCII'] = False
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+def create_app() -> Flask:
+    app = Flask(__name__)
+    app.config['JSON_AS_ASCII'] = False
+    app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+    app.register_blueprint(app_blueprint)
 
-app.register_blueprint(app_blueprint)
+    return app
+
+
+app = create_app()
 
 
 @app.route('/api/posts')

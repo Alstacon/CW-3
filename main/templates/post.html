@@ -6,9 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SKYPROGRAM post</title>
   <link href="../static/css/styles.min.css" rel="stylesheet">
+    <style>
+    a {
+    text-decoration: none;
+   }
+   </style>
 </head>
 
-<body>
+<body link="DarkSlateBlue" vlink="DarkSlateBlue" alink="DarkSlateBlue">
   <header class="container header">
     <div class="header__wrapper">
       <a href="/" class="header__btn-back">
@@ -33,16 +38,18 @@
             </div>
             <span class="item__username">{{post.poster_name}}</span>
           </a>
-          <button type="button" class="item__bookmark-btn">
-            <img src="../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
-          </button>
+         <a href="/bookmarks/add/{{post.pk}}">
+             <button type="button" class="item__bookmark-btn">
+             <img src="../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+             </button>
+            </a>
         </div>
         <a href="" class="item__post-link">
           <img src={{post.pic}} alt="" width="348" class="item__post-img">
         </a>
         <div class="item__descr">
           <p class="item__text">
-            {{post.content}}
+            {{post.content|safe}}
         </div>
         <div class="item__bottom">
           <div class="item__post-info">
@@ -55,9 +62,9 @@
             {% for comment in comments %}
           <div class="item__comments">
             <p class="item__comment">
-              <b>{{comment.commenter_name}}:</b> {{comment.comment}}
+                <a href="/user/{{comment.commenter_name}}">{{comment.commenter_name}}:</a> {{comment.comment}}
             </p>
-          {%endfor%}
+              {%endfor%}
           </div>
         </div>
       </div>

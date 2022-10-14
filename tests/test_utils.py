@@ -1,4 +1,9 @@
+import json
+
+import pytest
+
 import conftest
+from utils import Funcs, get_tags
 
 
 class TestFuncs:
@@ -36,3 +41,34 @@ class TestFuncs:
             assert number_of_comments == len(comments), 'Возвращает не то количество комментариев'
             for comment in comments:
                 assert comment['post_id'] == pk, 'Возвращает комменты не к тому посту'
+
+    def test_get_tag(self, posts_data, post_pk):
+        for pk in post_pk:
+            post = posts_data.get_post_by_pk(pk)
+            tagged_post = get_tags(post)
+            assert type(tagged_post) == dict, 'Пост возвращается не словарем'
+            for word in tagged_post['content']:
+                if word.startswith('#'):
+                    assert word not in tagged_post['content'], 'Слова с хештегом не заменяются'
+                if word.startswith('<a href='):
+                    assert word in tagged_post, 'Слова заменяются неправильно'
+
+    def test_add_bookmark(self, post_pk, bookmarks_data, posts_data):
+        bookmarks = bookmarks_data.get_all_data()
+        for pk in post_pk:
+            posts_data.add_bookmark(pk, bookmarks)
+            with open('./main/data/bookmarks.json', 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                assert len(data) > 0, 'Файл закладок не записывается'
+                assert type(data) == list, 'В файл записывается не json'
+
+    def test_delete_bookmark(self, post_pk, bookmarks_data, posts_data):
+        bookmarks = bookmarks_data.get_all_data()
+        for pk in post_pk:
+            posts_data.delete_bookmark(pk, bookmarks)
+            with open('./main/data/bookmarks.json', 'r', encoding='utf-8') as file:
+                data = json.load(file)
+                for post in data:
+                    assert post['pk'] != pk, 'Пост не удален/удален не тот пост'
+
+
